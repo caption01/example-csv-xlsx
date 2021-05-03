@@ -9,6 +9,7 @@ const readdir = util.promisify(fs.readdir);
 const readFiles = async () => {
   let filesList;
   const sourcePath = path.join(__dirname, "../source");
+  const outPath = path.join(__dirname, "../out");
 
   try {
     filesList = await readdir(sourcePath);
@@ -26,7 +27,7 @@ const readFiles = async () => {
     // add edit data
     XLSX.utils.sheet_add_json(workSheet, mapData);
 
-    XLSX.writeFile(workbook, "out3.csv");
+    XLSX.writeFile(workbook, `${outPath}/test-case.csv`);
   } catch (err) {
     console.log({ err });
   }
