@@ -11,24 +11,32 @@ const readdir = util.promisify(fs.readdir);
 const sourcePath = path.join(__dirname, "../source");
 const outPath = path.join(__dirname, "../out");
 
-const createWorkSheet = (rawData = {}) => {
+const createWorkSheet = (rawData = []) => {
+  const workSheetName = "test-result";
+  const workBook = XLSX.utils.book_new();
+
   const data = {
-    columnKey: templateColumns,
+    tempateCols: templateColumns,
     info: rawData,
   };
 
-  const sheetData = transformDataToSheetData(data);
-
+  const sheetData = transformDataToSheetData(data); // [['Result','id, ''],[],[],[]]
   const worksheet = XLSX.utils.aoa_to_sheet(sheetData);
+  return [workBook, worksheet, workSheetName];
+};
 
-  return worksheet;
+const getRawCsvData = (file) => {
+  const wb = XLSX.readFile(`${sourcePath}/${file}`);
+  const sn = wb.SheetNames[0];
+  const ws = wb.Sheets[sn];
+  const jsonData = XLSX.utils.sheet_to_json(ws);
+  return jsonData;
 };
 
 const processExcel = async (file) => {
   console.log("process", file);
-  const workSheetName = "test-result";
-  const workBook = XLSX.utils.book_new();
-  const workSheet = createWorkSheet();
+  const rawData = getRawCsvData(file);
+  const [workBook, workSheet, workSheetName] = createWorkSheet(rawData);
 
   await XLSX.utils.book_append_sheet(workBook, workSheet, workSheetName);
   await XLSX.writeFile(workBook, `${outPath}/generated-${file}.csv`);
