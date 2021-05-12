@@ -27,28 +27,28 @@ const readFiles = async () => {
     const mapData = map(jsonData, (d) => {
       // console.log(d)
       return {
-        Failed_count: ``,
+        failCount: ``,
         id: `${d.id}`,
         gender: `${d.gender}`,
-        age_inyear: `${d.age_inyear}`,
-        age_inmonth: `${d.age_inmonth}`,
-        hirate: `${d.hirate}`,
-        occuclass: `${d.occuclass}`,
-        paOccuclass: `${d.paOccuclass}`,
-        BasicPlan: `${d.BasicPlan}`,
-        Basic_SumAssured: `${d.Basic_SumAssured}`,
-        Basic_Premium: ``,
-        Payer_Gender: ``,
-        Payer_age_inyear:`${d.age_inyear}`,
-        Payer_age_inmonth:`${d.age_inmonth}`,
-        Payer_Type:``,
-        PaymentMode: ``,
-        Channel: ``,
+        ageInYear: `${d.age_inyear}`,
+        ageInMonth: `${d.age_inmonth}`,
+        hiRate: `${d.hirate}`,
+        occuClass: `${d.occuclass}`,
+        paOccuClass: `${d.paOccuclass}`,
+        basicPlan: `${d.BasicPlan}`,
+        basicSumAssured: `${d.Basic_SumAssured}`,
+        basicPremium: ``,
+        payerGender: ``,
+        payerAgeInyear:`${d.age_inyear}`,
+        payerAgeInmonth:`${d.age_inmonth}`,
+        payerType:``,
+        paymentMode: ``,
+        channel: ``,
         productGroup: ``,
         ridersSumassured: `${d['riders:Sumassured']}`,
-        code_result: ``,
-        code_actual: ``,
-        code_expected: `${d.code_expected}`
+        codeResult: ``,
+        codeActual: ``,
+        codeExpected: `${d.code_expected}`
       }
 
     });
