@@ -27,6 +27,7 @@ const readFiles = async () => {
     const mapData = map(jsonData, (d) => {
       // console.log(d)
       return {
+        result: ``,
         failCount: ``,
         id: `${d.id}`,
         gender: `${d.gender}`,
